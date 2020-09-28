@@ -2,12 +2,15 @@ import time
 
 num_runs = int(input('Сколько раз будем запускать цикл? '))
 
+# Определяем класс
 class TimeThis:
 
+    # Конструктор класса, по умолчанию количество запусков = 5
     def __init__(self, num_rums = 5):
         self.num_rums = num_rums 
 
     def __call__(self, func):
+        # Декоратор
         def time_counter():
             avg_time = 0
             for i in range(self.num_rums):
@@ -28,8 +31,10 @@ class TimeThis:
         avg_time = (t1 - self.t0)
         print('Время выполнения - {} секунд'.format(avg_time))
 
+# Создаем объект класса
 time_this = TimeThis(num_runs)
 
+# И используем его в качестве декоратора
 @time_this
 def f():
     for j in range(1000000):
@@ -40,4 +45,5 @@ def f():
           a = b
           b = c
 
+# Вызываем функцию
 f()
